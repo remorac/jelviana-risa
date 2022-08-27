@@ -13,6 +13,9 @@ return [
     'language' => 'id',
     'bootstrap' => ['log'],
     'controllerNamespace' => 'app\controllers',
+    'modules' => [
+        'acf' => ['class' => 'mdm\admin\Module'],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-app',
@@ -46,4 +49,12 @@ return [
         ],
     ],
     'params' => $params,
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            'site/*',
+            // 'debug/*',
+            // '*',
+        ]
+    ],
 ];
