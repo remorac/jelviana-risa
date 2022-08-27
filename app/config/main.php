@@ -47,12 +47,19 @@ return [
             'rules' => [
             ],
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            // 'cache' => 'cache',
+            // 'defaultRoles' => ['superuser'],
+        ],
+        'view' 
     ],
     'params' => $params,
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
             'site/*',
+            'acf/*',
             // 'debug/*',
             // '*',
         ]
