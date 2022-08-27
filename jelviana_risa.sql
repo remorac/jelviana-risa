@@ -7,6 +7,191 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 SET NAMES utf8mb4;
 
+DROP TABLE IF EXISTS `auth_assignment`;
+CREATE TABLE `auth_assignment` (
+  `item_name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `user_id` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `created_at` int(11) DEFAULT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`item_name`,`user_id`),
+  KEY `created_by` (`created_by`),
+  KEY `updated_by` (`updated_by`),
+  CONSTRAINT `auth_assignment_ibfk_1` FOREIGN KEY (`item_name`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `auth_assignment_ibfk_2` FOREIGN KEY (`created_by`) REFERENCES `user` (`id`),
+  CONSTRAINT `auth_assignment_ibfk_3` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
+('user',	'1',	1661585346,	NULL,	NULL,	NULL),
+('user',	'2',	1661586779,	NULL,	NULL,	NULL);
+
+DROP TABLE IF EXISTS `auth_item`;
+CREATE TABLE `auth_item` (
+  `name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `type` int(11) NOT NULL,
+  `description` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `rule_name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `data` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `created_at` int(11) DEFAULT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`name`),
+  KEY `rule_name` (`rule_name`),
+  KEY `idx-auth_item-type` (`type`),
+  KEY `name` (`name`),
+  KEY `created_by` (`created_by`),
+  KEY `updated_by` (`updated_by`),
+  CONSTRAINT `auth_item_ibfk_1` FOREIGN KEY (`rule_name`) REFERENCES `auth_rule` (`name`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `auth_item_ibfk_2` FOREIGN KEY (`created_by`) REFERENCES `user` (`id`),
+  CONSTRAINT `auth_item_ibfk_3` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
+('/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/assignment/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/assignment/assign',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/assignment/index',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/assignment/revoke',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/assignment/view',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/default/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/default/index',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/menu/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/menu/create',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/menu/delete',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/menu/index',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/menu/update',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/menu/view',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/permission/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/permission/assign',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/permission/create',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/permission/delete',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/permission/get-users',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/permission/index',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/permission/remove',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/permission/update',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/permission/view',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/role/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/role/assign',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/role/create',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/role/delete',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/role/get-users',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/role/index',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/role/remove',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/role/update',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/role/view',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/route/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/route/assign',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/route/create',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/route/index',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/route/refresh',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/route/remove',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/rule/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/rule/create',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/rule/delete',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/rule/index',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/rule/update',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/rule/view',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/user/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/user/activate',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/user/change-password',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/user/delete',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/user/index',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/user/login',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/user/logout',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/user/request-password-reset',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/user/reset-password',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/user/signup',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/acf/user/view',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/debug/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/debug/default/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/debug/default/db-explain',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/debug/default/download-mail',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/debug/default/index',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/debug/default/toolbar',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/debug/default/view',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/debug/user/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/debug/user/reset-identity',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/debug/user/set-identity',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/gap/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/gap/create',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/gap/delete',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/gap/index',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/gap/update',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/gap/view',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/gii/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/gii/default/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/gii/default/action',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/gii/default/diff',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/gii/default/index',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/gii/default/preview',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/gii/default/view',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/kriteria/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/kriteria/create',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/kriteria/delete',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/kriteria/index',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/kriteria/update',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/kriteria/view',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/laporan/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/laporan/index',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/pasien/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/pasien/create',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/pasien/delete',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/pasien/index',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/pasien/pemeriksaan-create',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/pasien/pemeriksaan-delete',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/pasien/pemeriksaan-update',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/pasien/pemeriksaan-view',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/pasien/update',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/pasien/view',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/site/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/site/about',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/site/captcha',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/site/contact',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/site/error',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/site/index',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/site/login',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/site/logout',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/site/request-password-reset',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/site/resend-verification-email',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/site/reset-password',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/site/signup',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/site/verify-email',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/user/*',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/user/create',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/user/delete',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/user/index',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/user/update',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('/user/view',	2,	NULL,	NULL,	NULL,	1661585307,	1661585307,	NULL,	NULL),
+('user',	1,	NULL,	NULL,	NULL,	1661585326,	1661585326,	NULL,	NULL);
+
+DROP TABLE IF EXISTS `auth_item_child`;
+CREATE TABLE `auth_item_child` (
+  `parent` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `child` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  PRIMARY KEY (`parent`,`child`),
+  KEY `child` (`child`),
+  CONSTRAINT `auth_item_child_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
+('user',	'/*');
+
+DROP TABLE IF EXISTS `auth_rule`;
+CREATE TABLE `auth_rule` (
+  `name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `data` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `created_at` int(11) DEFAULT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  PRIMARY KEY (`name`),
+  KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
 DROP TABLE IF EXISTS `gap`;
 CREATE TABLE `gap` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -136,8 +321,8 @@ CREATE TABLE `user` (
   `password_reset_token` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb3_unicode_ci NOT NULL,
   `status` smallint(6) NOT NULL DEFAULT 10,
-  `created_at` int(11) NOT NULL,
-  `updated_at` int(11) NOT NULL,
+  `created_at` int(11) DEFAULT NULL,
+  `updated_at` int(11) DEFAULT NULL,
   `verification_token` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
@@ -146,6 +331,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
-(1,	'user',	'fNZPhUb_jfJonh46xkcckgF9__UHW-xo',	'$2y$13$Ce//.4NmLtAcwRrX6Yutu.1orUWtlxMIU8I9LNJD.n.VWfbCqaFvC',	NULL,	'user@email.com',	10,	1661062822,	1661062822,	'st59FFJZxqRoL8q3t2cRf60uHxDuF6kA_1661062822');
+(1,	'user',	'fNZPhUb_jfJonh46xkcckgF9__UHW-xo',	'$2y$13$Ce//.4NmLtAcwRrX6Yutu.1orUWtlxMIU8I9LNJD.n.VWfbCqaFvC',	NULL,	'user@email.com',	10,	1661062822,	1661062822,	'st59FFJZxqRoL8q3t2cRf60uHxDuF6kA_1661062822'),
+(2,	'user2',	'R0lLUI6qjscbAiP5cob05eeB62Dh-trU',	'$2y$13$sYrAiUD4sbyNAa7Mkf767OXPlfTBFmMX4l.2XPGhm1KPHaA1ZGIUi',	NULL,	'user2@example.com',	10,	NULL,	NULL,	NULL);
 
--- 2022-08-27 03:52:08
+-- 2022-08-27 07:53:33
