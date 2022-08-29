@@ -2,6 +2,7 @@
 
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -87,5 +88,18 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]).'</div>'; ?>
+
+    <?php if ($model->pemeriksaanKriterias) { ?>
+    <br><b>Pemeriksaan Terkait</b>
+    <?php 
+        $array = [];
+        foreach ($model->pemeriksaanKriterias as $pemeriksaanKriteria) {
+            $array[] = '<li><a href="'.Url::to(['pasien/pemeriksaan-view', 'pemeriksaan_id' => $pemeriksaanKriteria->pemeriksaan_id]).'">'.$pemeriksaanKriteria->pemeriksaan->pasien->nama.' '.$pemeriksaanKriteria->pemeriksaan->tanggal.'</li>';
+        }
+    ?>
+    <ul>
+        <?= implode('', $array) ?>
+    </ul>
+    <?php } ?>
 
 </div>

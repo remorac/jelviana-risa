@@ -12,6 +12,7 @@ use Yii;
  * @property int $jenis
  *
  * @property User $id0
+ * @property PemeriksaanKriteria[] $pemeriksaanKriterias
  * @property Subkriteria[] $subkriterias
  */
 class Kriteria extends \yii\db\ActiveRecord
@@ -52,6 +53,16 @@ class Kriteria extends \yii\db\ActiveRecord
             'jenis' => 'Jenis',
             'jenisText' => 'Jenis',
         ];
+    }
+
+    /**
+     * Gets query for [[PemeriksaanKriterias]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPemeriksaanKriterias()
+    {
+        return $this->hasMany(PemeriksaanKriteria::className(), ['kriteria_id' => 'id']);
     }
 
     /**

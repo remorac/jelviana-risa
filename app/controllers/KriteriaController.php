@@ -117,7 +117,14 @@ class KriteriaController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        
+        try {
+            $model->delete();
+        } catch (\Exception $exception) {
+            Yii::$app->session->addFlash('error', 'Kriteria ini telah terpakai di pemeriksaan. <br><small>Silahkan hapus terlebih dahulu data pemeriksaan terkait.</small>');
+            return $this->redirect(['view', 'id' => $id]);
+        }
 
         return $this->redirect(['index']);
     }

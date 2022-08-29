@@ -23,5 +23,5 @@ use yii\web\JsExpression;
 <td><?= Html::activeDropDownList($model, "[$key]target", Subkriteria::targetOptions(),  ['class' => 'form-control']) ?></td>
 
 <td style="width:1px; white-space:nowrap; text-align:right; vertical-align:middle">
-    <a data-action="delete" title="Delete" href="#" class="btn btn-sm btn-outline-danger"><span class="fa fa-times"></span></a>
+    <?php if (!$model->pemeriksaanKriterias) { ?><a data-action="delete" title="Delete" href="#" class="btn btn-sm btn-outline-danger"><span class="fa fa-times"></span></a><?php } ?>
 </td>

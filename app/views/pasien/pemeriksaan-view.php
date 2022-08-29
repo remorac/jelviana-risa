@@ -45,6 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <br>
     <h4>Pemeriksaan <?= $pemeriksaan->tanggal ?></h4>
     <?= Html::a('Update Pemeriksaan', ['pemeriksaan-update', 'pemeriksaan_id' => $pemeriksaan->id], ['class' => 'btn btn-primary mb-2']) ?>
+    <?= Html::a('Hapus Pemeriksaan', ['pemeriksaan-delete', 'pemeriksaan_id' => $pemeriksaan->id], ['class' => 'btn btn-danger mb-2', 'data-method' => 'post', 'data-confirm' => 'Hapus Pemeriksaan?']) ?>
     <?php
         $searchModel  = new \app\models\PemeriksaanKriteriaSearch();
         $dataProvider = $searchModel->search(['PemeriksaanKriteriaSearch' => ['pemeriksaan_id' => $pemeriksaan->id]]);

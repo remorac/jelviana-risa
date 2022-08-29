@@ -68,13 +68,13 @@ class Subkriteria extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[PemeriksaanSubkriterias]].
+     * Gets query for [[PemeriksaanKriterias]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getPemeriksaanSubkriterias()
+    public function getPemeriksaanKriterias()
     {
-        return $this->hasMany(PemeriksaanSubkriteria::className(), ['subkriteria_id' => 'id']);
+        return $this->hasMany(PemeriksaanKriteria::className(), ['subkriteria_id' => 'id']);
     }
 
     public static function targetOptions($index = null)
