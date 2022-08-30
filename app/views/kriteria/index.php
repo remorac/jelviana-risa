@@ -43,6 +43,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style' => 'width:1px; white-space:nowrap;'],
             ],
             [
+                'attribute' => 'targetSubkriteriaNama',
+                'headerOptions' => ['style' => 'width:1px; white-space:nowrap;'],
+                'contentOptions' => ['style' => 'width:1px; white-space:nowrap;'],
+            ],
+            [
+                'attribute' => 'targetSubkriteriaNilai',
+                'headerOptions' => ['style' => 'width:1px; white-space:nowrap;'],
+                'contentOptions' => ['style' => 'width:1px; white-space:nowrap;'],
+            ],
+            [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Kriteria $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);

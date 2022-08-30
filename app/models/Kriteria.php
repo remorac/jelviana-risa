@@ -52,6 +52,8 @@ class Kriteria extends \yii\db\ActiveRecord
             'nama' => 'Nama',
             'jenis' => 'Jenis',
             'jenisText' => 'Jenis',
+            'targetSubkriteriaNama' => 'Subkriteria Target',
+            'targetSubkriteriaNilai' => 'Nilai Target',
         ];
     }
 
@@ -94,5 +96,25 @@ class Kriteria extends \yii\db\ActiveRecord
     public function getJenisText()
     {
         return self::jenisOptions($this->jenis);
+    }
+
+    public function getTargetSubkriteria()
+    {
+        return Subkriteria::findOne([
+            'kriteria_id' => $this->id,
+            'target' => 1,
+        ]);
+    }
+
+    public function getTargetSubkriteriaNama()
+    {
+        if ($this->targetSubkriteria) return $this->targetSubkriteria->nama;
+        return null;
+    }
+
+    public function getTargetSubkriteriaNilai()
+    {
+        if ($this->targetSubkriteria) return $this->targetSubkriteria->nilai;
+        return null;
     }
 }

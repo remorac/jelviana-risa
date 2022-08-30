@@ -156,6 +156,6 @@ class Pemeriksaan extends \yii\db\ActiveRecord
     }
     public function getResultText()
     {
-        return $this->result >= 4 ? '<span class="text-danger">Terindikasi COVID-19</span>' : '<span class="text-success">Tidak Terindikasi COVID-19</span>';
+        return $this->result >= Yii::$app->params['threshold'] ? '<span class="text-danger">Terindikasi COVID-19</span>' : '<span class="text-success">Tidak Terindikasi COVID-19</span>';
     }
 }
