@@ -17,8 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p class="">
-        <?= Html::a('Create Gap', ['create'], ['class' => 'btn btn-success']) ?>
+    <p class="d-none">
+        <?= Html::a('Tambah Gap', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -42,14 +42,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style' => 'width:1px; white-space:nowrap;'],
             ],
             'keterangan',
-            [
+            /* [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Gap $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                 },
                 'headerOptions' => ['style' => 'width:1px; white-space:nowrap;'],
                 'contentOptions' => ['style' => 'width:1px; white-space:nowrap;'],
-            ],
+            ], */
         ],
     ]); ?>
 
