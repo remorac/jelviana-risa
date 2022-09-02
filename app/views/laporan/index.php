@@ -38,7 +38,8 @@ for ($i = 1; $i <= 12 ; $i++) {
     <?php ActiveForm::end(); ?>
 
     <p></p>
-    <div class="printable" style="border:2px solid #ddd; border-radius:8px; box-shadow: inset 0 0 0px rgba(0,0,0,0.05); padding:8px">
+    <div class="" style="border:2px solid #ddd; border-radius:8px; box-shadow: inset 0 0 0px rgba(0,0,0,0.05); padding:8px">
+    <div class="printable">
         <br>
         <h2 class="text-center"><?= Html::encode($this->title) ?></h2>
         <p class="text-center"><?= date('F', mktime(0, 0, 0, $month, 10)) ?> <?= $year ?></p>
@@ -66,6 +67,7 @@ for ($i = 1; $i <= 12 ; $i++) {
             </tr>
         <?php } ?>
         </table>
+    </div>
     </div>
 
 </div>
