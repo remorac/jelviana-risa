@@ -54,12 +54,12 @@ for ($i = 1; $i <= 12 ; $i++) {
         <?php foreach ($pemeriksaans as $pemeriksaan) { ?>
             <tr>
                 <td class="text-center" style="width:1px; white-space:nowrap"><?= ++$i ?></td>
-                <td style="width:1px; white-space:nowrap"><?= $pemeriksaan->tanggal; ?></td>
-                <td style="width:1px; white-space:nowrap"><?= $pemeriksaan->pasien->nama; ?></td>
-                <td style="width:1px; white-space:nowrap"><?= $pemeriksaan->pasien->umur; ?></td>
+                <td><?= $pemeriksaan->tanggal; ?></td>
+                <td><?= $pemeriksaan->pasien->nama; ?></td>
+                <td><?= $pemeriksaan->pasien->umur; ?></td>
                 <td><?= $pemeriksaan->pasien->alamat; ?></td>
-                <td style="width:1px; white-space:nowrap"><?= Yii::$app->formatter->asDecimal($pemeriksaan->result, 2); ?></td>
-                <td style="width:1px; white-space:nowrap"><?= $pemeriksaan->resultText; ?></td>
+                <td><?= Yii::$app->formatter->asDecimal($pemeriksaan->result, 2); ?></td>
+                <td><?= $pemeriksaan->resultText; ?></td>
             </tr>
         <?php } ?>
         </table>
