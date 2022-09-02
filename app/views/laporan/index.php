@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 /* @var $searchModel app\models\PasienSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Laporan';
+$this->title = 'Laporan Hasil Pemeriksaan';
 $this->params['breadcrumbs'][] = $this->title;
 
 $years = [];
@@ -26,29 +26,32 @@ for ($i = 1; $i <= 12 ; $i++) {
 ?>
 <div class="pasien-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <?php $form = ActiveForm::begin(['action' => ['/laporan'], 'method' => 'get']); ?>
     <table>
         <tr>
             <td width="200px;" style="padding-right:10px"><?= Html::dropDownList('month', $month, $months, ['class' => 'form-control']) ?></td>
             <td width="100px;" style="padding-right:10px"><?= Html::dropDownList('year', $year, $years, ['class' => 'form-control']) ?></td>
             <td width="100px;" style="padding-right:10px"><?= Html::submitButton('Refresh', ['class' => 'btn btn-info']) ?></td>
+            <td width="100px;" style="padding-right:10px"><?= Html::button('Print', ['class' => 'btn btn-outline-secondary', 'onClick' => 'window.print();']) ?></td>
         </tr>
     </table>
     <?php ActiveForm::end(); ?>
 
     <p></p>
-    <div class="printable" style="border:2px solid #ddd; border-radius:8px; box-shadow: inset 0 0 0px rgba(0,0,0,0.05)">
-        <table class="table" style="margin-bottom: 0;">
+    <div class="printable" style="border:2px solid #ddd; border-radius:8px; box-shadow: inset 0 0 0px rgba(0,0,0,0.05); padding:8px">
+        <br>
+        <h2 class="text-center"><?= Html::encode($this->title) ?></h2>
+        <p class="text-center"><?= date('F', mktime(0, 0, 0, $month, 10)) ?> <?= $year ?></p>
+        <p></p>
+        <table class="table table-bordered" style="margin-bottom: 0;">
             <tr>
-                <th style="border-top: none;">No.</th>
-                <th style="border-top: none;">Tanggal</th>
-                <th style="border-top: none;">Nama</th>
-                <th style="border-top: none;">Umur</th>
-                <th style="border-top: none;">Alamat</th>
-                <th style="border-top: none;">Hasil</th>
-                <th style="border-top: none;">Keterangan</th>
+                <th>No.</th>
+                <th>Tanggal</th>
+                <th>Nama</th>
+                <th>Umur</th>
+                <th>Alamat</th>
+                <th>Hasil</th>
+                <th>Keterangan</th>
             </tr>
         <?php $i = 0; ?>
         <?php foreach ($pemeriksaans as $pemeriksaan) { ?>
@@ -66,3 +69,23 @@ for ($i = 1; $i <= 12 ; $i++) {
     </div>
 
 </div>
+
+<style>
+@media print {
+    body * {
+        visibility:hidden;
+    }
+    a[href]:after {
+        content: none !important;
+    }
+    .printable, .printable * {
+        visibility:visible;
+    }
+    .printable {
+        position: absolute;
+        width: 90%;
+        top:20px !important;
+        -webkit-print-color-adjust: exact;
+    }
+}
+</style>
