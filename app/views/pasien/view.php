@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= Html::a('Pemeriksaan Baru', ['pemeriksaan-create', 'id' => $model->id], ['class' => 'btn btn-success mb-2']) ?>
     <?php
         $searchModel  = new \app\models\PemeriksaanSearch();
-        $dataProvider = $searchModel->search(['PemeriksaanSearch' => ['kriteria_id' => $model->id]]);
+        $dataProvider = $searchModel->search(['PemeriksaanSearch' => ['pasien_id' => $model->id]]);
         $dataProvider->pagination = false;
     ?>
     
