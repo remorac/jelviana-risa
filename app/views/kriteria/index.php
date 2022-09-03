@@ -28,12 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         // 'filterModel' => $searchModel,
         'columns' => [
-            // ['class' => 'yii\grid\SerialColumn'],
-            [
+            ['class' => 'yii\grid\SerialColumn'],
+            /* [
                 'attribute' => 'id',
                 'headerOptions' => ['style' => 'width:1px; white-space:nowrap;'],
                 'contentOptions' => ['style' => 'width:1px; white-space:nowrap;'],
-            ],
+            ], */
             'nama',
             [
                 'attribute' => 'jenis',

@@ -65,7 +65,8 @@ class KriteriaSearch extends Kriteria
 
         $query->andFilterWhere(['like', 'nama', $this->nama]);
 
-        $query->orderBy('jenis ASC, nama ASC');
+        // $query->orderBy('jenis ASC, nama ASC');
+        $query->orderBy('id ASC');
 
         return $dataProvider;
     }

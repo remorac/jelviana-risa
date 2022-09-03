@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Kriteria */
 
-$this->title = 'Create Kriteria';
+$this->title = 'Tambah Kriteria';
 $this->params['breadcrumbs'][] = ['label' => 'Kriteria', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
