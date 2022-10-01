@@ -209,7 +209,8 @@ INSERT INTO `gap` (`id`, `selisih`, `bobot`, `keterangan`) VALUES
 (5,	-2,	3,	'Kriteria individu kekurangan 2 tingkat/level'),
 (6,	3,	2.5,	'Kriteria individu kelebihan 3 tingkat/level'),
 (7,	-3,	2,	'Kriteria individu kekurangan 3 tingkat/level'),
-(8,	4,	1.5,	'Kriteria individu kelebihan 4 tingkat/level');
+(8,	4,	1.5,	'Kriteria individu kelebihan 4 tingkat/level'),
+(9,	-4,	1,	'Kriteria individu kekurangan 4 tingkat/level');
 
 DROP TABLE IF EXISTS `kriteria`;
 CREATE TABLE `kriteria` (
@@ -247,7 +248,8 @@ CREATE TABLE `pasien` (
 
 INSERT INTO `pasien` (`id`, `nama`, `umur`, `alamat`) VALUES
 (1,	'Isaac Newton',	34,	'asdfghjkl'),
-(2,	'Nikola Tesla',	44,	'qwertyuioplkjhgfdsazxcvbnm');
+(2,	'Nikola Tesla',	44,	'qwertyuioplkjhgfdsazxcvbnm'),
+(3,	'Jel',	56,	'mars');
 
 DROP TABLE IF EXISTS `pemeriksaan`;
 CREATE TABLE `pemeriksaan` (
@@ -261,8 +263,7 @@ CREATE TABLE `pemeriksaan` (
 
 INSERT INTO `pemeriksaan` (`id`, `pasien_id`, `tanggal`) VALUES
 (2,	1,	'2022-08-30'),
-(3,	1,	'2022-08-24'),
-(4,	2,	'2022-08-30');
+(3,	1,	'2022-08-24');
 
 DROP TABLE IF EXISTS `pemeriksaan_kriteria`;
 CREATE TABLE `pemeriksaan_kriteria` (
@@ -285,10 +286,7 @@ INSERT INTO `pemeriksaan_kriteria` (`id`, `pemeriksaan_id`, `kriteria_id`, `subk
 (6,	2,	3,	9),
 (7,	3,	1,	4),
 (8,	3,	4,	1),
-(9,	3,	3,	8),
-(10,	4,	1,	5),
-(11,	4,	4,	2),
-(12,	4,	3,	9);
+(9,	3,	3,	8);
 
 DROP TABLE IF EXISTS `subkriteria`;
 CREATE TABLE `subkriteria` (
@@ -334,4 +332,4 @@ INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_res
 (1,	'user',	'fNZPhUb_jfJonh46xkcckgF9__UHW-xo',	'$2y$13$Ce//.4NmLtAcwRrX6Yutu.1orUWtlxMIU8I9LNJD.n.VWfbCqaFvC',	NULL,	'user@email.com',	10,	1661062822,	1661062822,	'st59FFJZxqRoL8q3t2cRf60uHxDuF6kA_1661062822'),
 (2,	'user2',	'R0lLUI6qjscbAiP5cob05eeB62Dh-trU',	'$2y$13$sYrAiUD4sbyNAa7Mkf767OXPlfTBFmMX4l.2XPGhm1KPHaA1ZGIUi',	NULL,	'user2@example.com',	10,	NULL,	NULL,	NULL);
 
--- 2022-08-27 07:53:33
+-- 2022-10-01 18:02:49
